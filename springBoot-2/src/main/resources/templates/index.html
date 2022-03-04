@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h3 th:text="${message}">.....</h3>
+	<h4 th:if="${list}">List des noms</h4>
+	<h4 th:unless="${list}">List des Employee</h4>
+	<ul th:if="${list}">
+		<th:block th:each="nom:${list}">
+			<li th:utext="${nom}"></li>
+		</th:block>
+	</ul>
+	<a th:href="@{/list}">List Employee</a>
+	<table th:if="${listEmployee}">
+		<tr>
+			<th>ID</th>
+			<th>First Name</th>
+			<th>Last Name</th>
+		</tr>
+		<tr th:each="emp:${listEmployee}">
+			<td th:utext="${emp.empId}"></td>
+			<td th:utext="${emp.firstName}"></td>
+			<td th:utext="${emp.lastName}"></td>
+		</tr>
+
+	</table>
+
+	<a th:href="@{/listCustomer}">List Customers</a>
+	<table th:if="${listCustomer}">
+		<tr>
+			<th>ID</th>
+			<th>city</th>
+			<th>address</th>
+			<th>state</th>
+		</tr>
+		<tr th:each="cust:${listCustomer}">
+			<td th:utext="${cust.custId}"></td>
+			<td th:utext="${cust.city}"></td>
+			<td th:utext="${cust.address}"></td>
+			<td th:utext="${cust.state}"></td>
+		</tr>
+
+	</table>
+
+	<form action="listByState" method="post">
+		<input type="text" name="state"> <input type="submit"
+		
+			value="list Customer by State">
+	</form>
+	<form action="listByAddress" method="post">
+		<input type="text" name="address"> <input type="submit"
+			value="list Customer by Adress">
+			
+	</form>
+
+	<table th:if="${listByState}">
+		<tr>
+			<th>ID</th>
+			<th>city</th>
+			<th>address</th>
+			<th>state</th>
+		</tr>
+		<tr th:each="cust:${listByState}">
+			<td th:utext="${cust.custId}"></td>
+			<td th:utext="${cust.city}"></td>
+			<td th:utext="${cust.address}"></td>
+			<td th:utext="${cust.state}"></td>
+		</tr>
+		</table>
+		<table th:if="${listByAddress}">
+			<tr>
+				<th>ID</th>
+				<th>city</th>
+				<th>address</th>
+				<th>state</th>
+			</tr>
+			<tr th:each="cust:${listByAddress}">
+				<td th:utext="${cust.custId}"></td>
+				<td th:utext="${cust.city}"></td>
+				<td th:utext="${cust.address}"></td>
+				<td th:utext="${cust.state}"></td>
+			</tr>
+
+		</table>
+		<div>
+			<a th:href="@{'/pagination?page=1&size='+${size}}">1</a>
+			<a th:href="@{'/pagination?page='+${currentPage+1}'&size='+${size}}">next</a>
+		</div>
+</body>
+</html>
